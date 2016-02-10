@@ -1,4 +1,4 @@
-0) Class
+KNeighborsClassifier(n_neighbors=3)0) Class
 1) Alcohol 
 2) Malic acid 
 3) Ash 
