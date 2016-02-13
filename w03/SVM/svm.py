@@ -1,28 +1,37 @@
-import pandas as pd
-import sklearn.cross_validation as cv
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import scale
+from sklearn.svm import SVC
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn import grid_search
 import numpy as np
+from sklearn.cross_validation import KFold
 
-#def neigh(x):
-#    KNeighborsClassifier(n_neighbors=3)
+clf0 = SVC(C = 1000, kernel='linear', random_state = 241) 
 
-content = [x[3:].strip(' \n') for x in open('wine_attrs.txt')]
-content = pd.read_csv('wine.data', names=content)
+from sklearn import datasets
 
-X = scale(content.ix[:,1:])
-#print(X)
-#X1 = scale(X)
-#print(X1)
-y = content.ix[:,0]
+newsgroups = datasets.fetch_20newsgroups(
+                    subset='all', 
+                    categories=['alt.atheism', 'sci.space']
+             )
 
-kf = cv.KFold(content.shape[0], n_folds = 5, shuffle=True, random_state=42)
-#for train_indices, test_indices in kf:
- #   print('Train: %s | test: %s' % (train_indices, test_indices))
 
-neigh = KNeighborsClassifier(n_neighbors=29)
-acc = list(map(lambda x: np.mean(cv.cross_val_score(KNeighborsClassifier(n_neighbors=x), X, y=y, cv=kf)), range(1,51)))
+y = newsgroups.target
+tfidf_vectorizer = TfidfVectorizer()
+tfidf = tfidf_vectorizer.fit_transform(newsgroups.data)
 
-acc29 = [neigh.fit(X[train], y.ix[train]).score(X[test], y.ix[test]) for train, test in kf]
 
-print(acc, np.round(np.max(acc),2), np.argmax(acc), np.mean(acc29))#, np.mean(acc3))
+grid = {'C': np.power(10.0, np.arange(-5, 6))}
+cv = KFold(len(newsgroups.data), n_folds=5, shuffle=True, random_state=241)
+clf = SVC(kernel='linear', random_state=241)
+gs = grid_search.GridSearchCV(clf, grid, scoring='accuracy', cv=cv)
+gs.fit(tfidf, y)
+
+clf0.fit(tfidf,y)
+data = clf0.coef_.data
+indices = clf0.coef_.indices
+a = np.array(clf0.coef_)
+#b = a.reshape(28382)
+names=np.array(tfidf_vectorizer.get_feature_names())
+
+most_often = indices[np.argsort(data)[-10:][::-1]]
+
+print(gs.grid_scores_, np.sort(names[most_often]))#, len(tfidf_vectorizer.get_feature_names()))
