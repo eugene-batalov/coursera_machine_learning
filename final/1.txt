@@ -1,1 +1,6 @@
-577 314
+Пропуски есть в столбцах:
+
+'dire_bottle_time', 'dire_courier_time', 'dire_flying_courier_time', 'first_blood_player2', 'radiant_first_ward_time', 'dire_first_ward_time', 'radiant_flying_courier_time', 'radiant_courier_time', 'radiant_bottle_time', 'first_blood_time', 'first_blood_player1', 'first_blood_team'
+
+Для столбца first_blood_team пропуск означает, что в первые 5 минут ни один герой не погиб.
+Для столбца first_blood_player2 (кто из игроков совершил первое убийство) пропуск может означать, что или никто не погиб в первые 5 минут, или первый игрок погиб от крипов или башни.
