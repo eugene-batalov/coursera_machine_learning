@@ -1,0 +1,13 @@
+Columns with missing values:  ['first_blood_time' 'first_blood_team' 'first_blood_player1'
+ 'first_blood_player2' 'radiant_bottle_time' 'radiant_courier_time'
+ 'radiant_flying_courier_time' 'radiant_first_ward_time' 'dire_bottle_time'
+ 'dire_courier_time' 'dire_flying_courier_time' 'dire_first_ward_time']
+Target column name:  radiant_win
+Time elapsed:  0:00:55.026165  quality:  0.700208881661
+Trees:  10  Quality =  0.690314597261  cross_val_score done in  0:01:23.189993
+Trees:  20  Quality =  0.711262132437  cross_val_score done in  0:02:53.092996
+Trees:  30  Quality =  0.7226477029  cross_val_score done in  0:04:16.544503
+Trees:  40  Quality =  0.730884825933  cross_val_score done in  0:05:36.451028
+Trees:  50  Quality =  0.737934028497  cross_val_score done in  0:06:58.582929
+Trees:  70  Quality =  0.749267978006  cross_val_score done in  0:09:28.785784
+[0.69031459726111488, 0.71126213243722536, 0.72264770289988889, 0.73088482593322435, 0.73793402849740752, 0.74926797800551193]
